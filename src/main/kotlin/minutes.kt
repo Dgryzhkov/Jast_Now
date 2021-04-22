@@ -1,22 +1,18 @@
-
-fun minutes(): Int {
-    val min = timeAgo / second
-    return min
-}
-
-fun endingMinuteMiddle(): String {
-    val end = when ((timeAgo / second) % 10) {
-        1 -> "минуту"
-        2, 3, 4 -> "минуты"
-        else -> "минут"
+fun elevenMinutes(time: Int): String {
+    val end = when ((time / SECOND) % 100) {
+        11 -> MINUTES
+        else -> endingMinutes(time)
     }
     return end
 }
 
-fun endigMinute(): String {
-    val end = when (timeAgo / second) {
-        in 11..19 -> "минут"
-        else -> endingMinuteMiddle()
+fun endingMinutes(time: Int): String {
+    val end = when (time / SECOND % 10) {
+        0, in 12..19 -> MINUTES
+        1 -> MINUTES + ENDING_MINUTE_U
+        in 2..4 -> MINUTES + ENDING_MINUTES_YOU
+        in 5..9 -> MINUTES
+        else -> MINUTES + ENDING_MINUTES_YOU
     }
     return end
 }

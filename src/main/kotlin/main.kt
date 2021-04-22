@@ -1,22 +1,19 @@
-const val second = 60
-
-val timeAgo = 3600
+const val SECOND = 60
 
 fun main() {
+    val timeAgo = 60 * 11
 
-    println("был(а) в сети ${minutesHoursDay()} ")
+    println(
+        when {
+            timeAgo <= SECOND -> "был(а) только что"
+            timeAgo < SECOND * SECOND -> "был(а) ${timeAgo / SECOND} ${ending(timeAgo)} назад"
+            timeAgo < 24 * SECOND * SECOND -> "был(а) в сети ${timeAgo / (SECOND * SECOND)} ${ending(timeAgo)} назад"
+            timeAgo < 48 * SECOND * SECOND -> "был(а) сегодня"
+            timeAgo < 72 * SECOND * SECOND -> "был(а) вчера"
+            else -> "был(а) давно"
+        }
+    )
 }
 
 
-fun minutesHoursDay(): String {
-    val time = when (timeAgo) {
-        in 0..second-1 -> " только что"
-        in second..second * second-1 -> "${minutes()} ${endigMinute()} назад"
-        in second * second ..24 * second * second-1 -> "${hours()} ${endingHours()} назад"
-        in 24 * second * second ..24 * second * second * 2-1 -> "сегодня"
-        in 24 * second * second * 2 ..24 * second * second * 3-1 -> "вчера"
-        else -> "давно"
-    }
-    return time
-}
 
