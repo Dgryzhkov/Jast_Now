@@ -1,3 +1,43 @@
+const val MINUTE = 60
+const val HOUR = 60 * MINUTE
+const val DAY = 24 * HOUR
+
+fun ending(
+    time: Int,
+    one: String,
+    few: String,
+    many: String
+) = "$time " + if (time % 100 in 11..14) many else when (time % 10) {
+    1 -> one
+    2, 3, 4 -> few
+    else -> many
+}
+
+fun minutes(minutes: Int) = ending(
+    time = minutes,
+    one = "минуту",
+    few = "минуты",
+    many = "минут"
+)
+
+fun hours(hours: Int) = ending(
+    time = hours,
+    one = "час",
+    few = "часа",
+    many = "часов"
+)
+
+fun message(seconds: Int) = when {
+    seconds < MINUTE -> "был(а) только что"
+    seconds < HOUR -> "был(а) в сети ${minutes(seconds / MINUTE)} назад"
+    seconds < DAY -> "был(а) в сети ${hours(seconds / HOUR)} назад"
+    seconds < 2 * DAY -> "был(а) сегодня"
+    seconds < 3 * DAY -> "был(а) вчера"
+    else -> "был(а) давно"
+}
+
+/* то что  придумал
+const val SECOND = 60
 const val HOURS = "час"
 const val MINUTES = "минут"
 const val ENDING_HOURS_A = "а"
@@ -32,3 +72,4 @@ fun printEnding(time: Int): String {
         else -> "был(а) давно"
     }
 }
+*/

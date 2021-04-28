@@ -1,9 +1,8 @@
-const val SECOND = 60
 
 
 fun main() {
-    val timeAgo = SECOND// веди количество секунд
+    val timeAgo = HOUR*11// введи время
 
-    println(printEnding(timeAgo))
+    println(message(timeAgo))
 }
 
